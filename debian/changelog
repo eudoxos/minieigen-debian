@@ -1,3 +1,9 @@
+minieigen (0.3~bzr23-1) unstable; urgency=low
+
+  * Initial package for Debian.
+
+ -- Anton Gladky <gladky.anton@gmail.com>  Tue, 30 Oct 2012 22:23:37 +0100
+
 minieigen (0.3-3) unstable; urgency=low
 
   * Use default boost version always (precise has separate branch now)
