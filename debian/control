@@ -13,7 +13,8 @@ Vcs-Browser: http://git.debian.org/?p=debian-science/packages/minieigen.git
 Package: python-minieigen
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends},
+ node-underscore, libjs-jquery
 Description: Small boost::python wrapper of parts of the Eigen library.
  Small wrapper for core parts of Eigen, c++ library for linear algebra.
  It is mainly useful for inspecting c++ code which already uses eigen and
