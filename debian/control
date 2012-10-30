@@ -1,11 +1,14 @@
 Source: minieigen
 Priority: optional
-Maintainer: Václav Šmilauer <eu@doxos.eu>
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Uploaders: Václav Šmilauer <eu@doxos.eu>, 
+ Anton Gladky <gladky.anton@gmail.com>
 Build-Depends: debhelper (>= 9), libboost-python-dev, libeigen3-dev, python-sphinx
 Standards-Version: 3.9.3
 Section: libs
 Homepage: http://www.launchpad.net/minieigen
-Vcs-Bzr: lp:minieigen
+Vcs-Git: git://git.debian.org/git/debian-science/packages/minieigen.git
+Vcs-Browser: http://git.debian.org/?p=debian-science/packages/minieigen.git
 
 Package: python-minieigen
 Section: python
