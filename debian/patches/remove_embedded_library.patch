@@ -1,0 +1,33 @@
+--- a/setup.py
++++ b/setup.py
+@@ -13,9 +13,9 @@
+ 	# * https://bugs.launchpad.net/panda3d/+bug/919237
+ 	define_macros+=[('EIGEN_DONT_VECTORIZE',None)]
+ else:
+-	libraries=['boost_python']
++	libraries=['boost_python','double-conversion']
+ 	library_dirs=[]
+-	include_dirs=['/usr/include/eigen3','minieigen']
++	include_dirs=['/usr/include/eigen3','minieigen','/usr/include/python2.7/']
+ 
+ setup(name='minieigen',
+ 	version='0.3-5',
+@@ -37,14 +37,6 @@
+ 	],
+ 	ext_modules=[Extension('minieigen',
+ 		sources=['minieigen/minieigen.cpp',
+-			'minieigen/double-conversion/bignum.cc',
+-			'minieigen/double-conversion/bignum-dtoa.cc',
+-			'minieigen/double-conversion/cached-powers.cc',
+-			'minieigen/double-conversion/diy-fp.cc',
+-			'minieigen/double-conversion/double-conversion.cc',
+-			'minieigen/double-conversion/fast-dtoa.cc',
+-			'minieigen/double-conversion/fixed-dtoa.cc',
+-			'minieigen/double-conversion/strtod.cc'
+ 		],
+ 		libraries=libraries,
+ 		library_dirs=library_dirs,
+--- a/MANIFEST.in
++++ /dev/null
+@@ -1 +0,0 @@
+-recursive-include minieigen/double-conversion *.h
