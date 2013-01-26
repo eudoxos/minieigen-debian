@@ -1,8 +1,8 @@
-minieigen (0.3~bzr23-1) unstable; urgency=low
+minieigen (0.3~dfsg~bzr25-1) unstable; urgency=low
 
   * Initial package for Debian.
 
- -- Anton Gladky <gladky.anton@gmail.com>  Tue, 30 Oct 2012 22:23:37 +0100
+ -- Anton Gladky <gladk@debian.org>  Sat, 26 Jan 2013 16:42:26 +0100
 
 minieigen (0.3-3) unstable; urgency=low
 
