@@ -1,3 +1,7 @@
+Description: Use packaged version of double-conversion
+Author: Anton Gladky <gladk@debian.org>
+Last-Update: 2013-01-26
+
 --- a/setup.py
 +++ b/setup.py
 @@ -13,9 +13,9 @@
