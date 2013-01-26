@@ -1,10 +1,10 @@
 minieigen (0.3~dfsg~bzr25-1) unstable; urgency=low
 
-  * Initial package for Debian.
+  * Initial package for Debian. (Closes: #691800)
 
  -- Anton Gladky <gladk@debian.org>  Sat, 26 Jan 2013 16:42:26 +0100
 
-minieigen (0.3-3) unstable; urgency=low
+minieigen (0.3~-3) unstable; urgency=low
 
   * Use default boost version always (precise has separate branch now)
 

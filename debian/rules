@@ -7,11 +7,11 @@ export DEB_BUILD_HARDENING=1
 
 export PYTHONPATH :=  $(CURDIR)/debian/python-minieigen/usr/lib/python2.7/dist-packages:$(PYTHONPATH);
 
-override_dh_installdoc:
+override_dh_installdocs:
 	dh_installdocs # run the default
 	make -C doc html
 	#dh_sphinxdoc doc/build/html
-	cp -r doc/build/html debian/python-minieigen/usr/share/doc/python-minieigenoverride_dh_installdoc:
+	cp -r doc/build/html debian/python-minieigen/usr/share/doc/python-minieigen
 
 override_dh_auto_install:
 	dh_auto_install
