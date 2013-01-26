@@ -15,7 +15,7 @@ Package: python-minieigen
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends},
- node-underscore, libjs-jquery
+ node-underscore, libjs-jquery, python (>= 2.7), python (<<2.8)
 Recommends: libeigen3-dev
 Description: Small boost::python wrapper of parts of the Eigen library.
  Small wrapper for core parts of Eigen, c++ library for linear algebra.
