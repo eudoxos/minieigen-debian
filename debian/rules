@@ -1,11 +1,10 @@
 #!/usr/bin/make -f
 
-export DEB_BUILD_HARDENING=1
-
 %:
-	dh $@
+	dh $@ --with python2
+PYVER = $(shell pyversions -dv)
 
-export PYTHONPATH :=  $(CURDIR)/debian/python-minieigen/usr/lib/python2.7/dist-packages:$(PYTHONPATH);
+export PYTHONPATH :=  $(CURDIR)/debian/python-minieigen/usr/lib/python$(PYVER)/dist-packages:$(PYTHONPATH);
 
 override_dh_installdocs:
 	dh_installdocs # run the default
