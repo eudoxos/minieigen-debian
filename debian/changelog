@@ -1,3 +1,11 @@
+minieigen (0.3~dfsg~bzr25-2) unstable; urgency=low
+
+  * [6c7cd63] Fix doc-generation on non-linux archs.
+  * [c171a89] Adjust packaging in order to python2.
+  * [aebe6ba] Use wrap-and-sort.
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 07 Apr 2013 11:06:45 +0200
+
 minieigen (0.3~dfsg~bzr25-1) unstable; urgency=low
 
   * Initial package for Debian. (Closes: #691800)
