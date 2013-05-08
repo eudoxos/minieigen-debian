@@ -1,6 +1,6 @@
 Description: Use packaged version of double-conversion
 Author: Anton Gladky <gladk@debian.org>
-Last-Update: 2013-01-26
+Last-Update: 2013-05-08
 
 --- a/setup.py
 +++ b/setup.py
@@ -15,7 +15,7 @@ Last-Update: 2013-01-26
 +	include_dirs=['/usr/include/eigen3','minieigen','/usr/include/python2.7/']
  
  setup(name='minieigen',
- 	version='0.3-5',
+ 	version='0.3-7a',
 @@ -37,14 +37,6 @@
  	],
  	ext_modules=[Extension('minieigen',
