@@ -7,10 +7,10 @@ PYVER = $(shell pyversions -dv)
 export PYTHONPATH :=  $(CURDIR)/debian/python-minieigen/usr/lib/python$(PYVER)/dist-packages:$(PYTHONPATH);
 
 override_dh_installdocs:
-	dh_installdocs # run the default
+	dh_installdocs
 	make -C doc html
-	#dh_sphinxdoc doc/build/html
 	cp -r doc/build/html debian/python-minieigen/usr/share/doc/python-minieigen
+	dh_sphinxdoc
 
 override_dh_auto_install:
 	dh_auto_install

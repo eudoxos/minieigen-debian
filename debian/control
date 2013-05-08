@@ -10,9 +10,9 @@ Build-Depends:
  libdouble-conversion-dev,
  libeigen3-dev,
  python-dev (>=2.6.6-3~),
- python-sphinx
-Standards-Version: 3.9.4
+ python-sphinx (>= 1.0.7+dfsg)
 X-Python-Version: >= 2.7
+Standards-Version: 3.9.4
 Section: libs
 Homepage: http://www.launchpad.net/minieigen
 Vcs-Git: git://git.debian.org/git/debian-science/packages/minieigen.git
@@ -22,16 +22,15 @@ Package: python-minieigen
 Section: python
 Architecture: any
 Depends:
- libjs-jquery,
- node-underscore,
  python (<<2.8),
  python (>= 2.7),
  ${misc:Depends},
  ${python:Depends},
- ${shlibs:Depends}
+ ${shlibs:Depends},
+ ${sphinxdoc:Depends}
 Recommends:
  libeigen3-dev
-Description: Small boost::python wrapper of parts of the Eigen library.
+Description: Small boost::python wrapper of parts of the Eigen library
  Small wrapper for core parts of Eigen, c++ library for linear algebra.
  It is mainly useful for inspecting c++ code which already uses eigen and
  boost::python. Supported types are Vectors (2,3,6 and dynamic-sized with
