@@ -1,3 +1,13 @@
+minieigen (0.3~dfsg~bzr38-1) unstable; urgency=medium
+
+  * [545a9ff] Imported Upstream version 0.3~dfsg~bzr38
+  * [27c8eb0] Bump Standards-Version: 3.9.5, no changes.
+  * [eebe537] Refresh patch.
+  * [047c7d4] Ignore quilt dir
+  * [800cc13] Unapply patches after build
+
+ -- Anton Gladky <gladk@debian.org>  Sat, 21 Dec 2013 10:09:29 +0100
+
 minieigen (0.3~dfsg~bzr32-1) unstable; urgency=low
 
   * [85e0902] Imported Upstream version 0.3~dfsg~bzr32
