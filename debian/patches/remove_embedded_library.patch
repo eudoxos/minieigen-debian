@@ -15,7 +15,7 @@ Last-Update: 2013-05-08
 +	include_dirs=['/usr/include/eigen3','minieigen','/usr/include/python2.7/']
  
  setup(name='minieigen',
- 	version='0.3-7a',
+ 	version='0.3-8',
 @@ -37,14 +37,6 @@
  	],
  	ext_modules=[Extension('minieigen',
