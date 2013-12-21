@@ -1,3 +1,12 @@
+minieigen (0.3~dfsg~bzr32-1) unstable; urgency=low
+
+  * [85e0902] Imported Upstream version 0.3~dfsg~bzr32
+  * [497377a] Refresh patches. Remove ones, applied by upstream.
+  * [349b4b5] Bumped Standards-Version to 3.9.4 (no changes). 
+              Use dh_sphinxdoc.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 08 May 2013 21:31:07 +0200
+
 minieigen (0.3~dfsg~bzr25-2) unstable; urgency=low
 
   * [6c7cd63] Fix doc-generation on non-linux archs.
