@@ -1,3 +1,9 @@
+minieigen (0.3~dfsg~bzr38-3) unstable; urgency=medium
+
+  * [1513b33] Fix additional parameter injection for weak archs.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 27 Dec 2013 21:34:59 +0100
+
 minieigen (0.3~dfsg~bzr38-2) unstable; urgency=medium
 
   * [02e6619] Add ggc-min-expand and ggc-min-heapsize parameters to compiler 
