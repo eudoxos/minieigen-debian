@@ -1,3 +1,10 @@
+minieigen (0.3~dfsg~bzr38-2) unstable; urgency=medium
+
+  * [02e6619] Add ggc-min-expand and ggc-min-heapsize parameters to compiler 
+              on archs, where compilation fails due to insufficient RAM.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 27 Dec 2013 16:05:58 +0100
+
 minieigen (0.3~dfsg~bzr38-1) unstable; urgency=medium
 
   * [545a9ff] Imported Upstream version 0.3~dfsg~bzr38
