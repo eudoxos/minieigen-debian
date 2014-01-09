@@ -5,6 +5,7 @@ Uploaders:
  Václav Šmilauer <eu@doxos.eu>,
  Anton Gladky <gladk@debian.org>
 Build-Depends:
+ clang,
  debhelper (>= 9),
  libboost-python-dev,
  libdouble-conversion-dev,
