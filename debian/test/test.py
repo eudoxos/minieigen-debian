@@ -67,7 +67,7 @@ class SimpleTests(unittest.TestCase):
     self.failUnlessEqual(m3q[0][0],1)
     self.failUnlessEqual(m3q[1][2],-1)
     
-    q4=q3.setFromTwoVectors(mne.Vector3(1,2,3),mne.Vector3(2,3,4))
+    q4.setFromTwoVectors(mne.Vector3(1,2,3),mne.Vector3(2,3,4))
     self.failUnlessEqual(q4.norm(),1)
 
 if __name__ == '__main__':
