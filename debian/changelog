@@ -4,7 +4,7 @@ minieigen (0.4~dfsg~bzr50-1) experimental; urgency=medium
   * [4e33f4a] Update self-test.
   * [e07aadd] Set clang explicitly.
 
- -- Anton Gladky <gladky.anton@gmail.com>  Thu, 09 Jan 2014 18:41:01 +0100
+ -- Anton Gladky <gladk@debian.org>  Thu, 09 Jan 2014 18:41:01 +0100
 
 minieigen (0.3~dfsg~bzr38-3) unstable; urgency=medium
 
