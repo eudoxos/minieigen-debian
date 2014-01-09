@@ -10,7 +10,7 @@ bzr checkout lp:minieigen
 cd minieigen
 
 BZR_REV=$(bzr revno)
-VER_DEB=0.3~dfsg~bzr$BZR_REV
+VER_DEB=0.4~dfsg~bzr$BZR_REV
 FOLDER_NAME=minieigen-$VER_DEB
 TARBALL_NAME=minieigen_$VER_DEB.orig.tar.xz
 
