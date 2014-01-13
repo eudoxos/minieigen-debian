@@ -1,3 +1,10 @@
+minieigen (0.4~dfsg~bzr50-3) unstable; urgency=medium
+
+  * [71027c0] Update version number in get_orig script.
+  * Move new version from experimental to unstable.
+
+ -- Anton Gladky <gladk@debian.org>  Mon, 13 Jan 2014 21:45:50 +0100
+
 minieigen (0.4~dfsg~bzr50-2) experimental; urgency=medium
 
   * [34938b8] Do not use clang explicitly.
