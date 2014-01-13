@@ -1,3 +1,9 @@
+minieigen (0.4~dfsg~bzr50-2) experimental; urgency=medium
+
+  * [34938b8] Do not use clang explicitly.
+
+ -- Anton Gladky <gladk@debian.org>  Mon, 13 Jan 2014 19:24:53 +0100
+
 minieigen (0.4~dfsg~bzr50-1) experimental; urgency=medium
 
   * [5b1e3d4] Imported Upstream version 0.4~dfsg~bzr50
