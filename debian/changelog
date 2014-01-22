@@ -1,3 +1,9 @@
+minieigen (0.4~dfsg~bzr50-5) unstable; urgency=medium
+
+  * [9c30a02] Set gcc parameters for all archs.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 22 Jan 2014 10:44:52 +0100
+
 minieigen (0.4~dfsg~bzr50-4) unstable; urgency=medium
 
   * [47677dc] Use additional gcc parameters on weak archs 
