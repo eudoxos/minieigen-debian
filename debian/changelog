@@ -1,3 +1,9 @@
+minieigen (0.4~dfsg~bzr50-6) unstable; urgency=medium
+
+  * [3562d4b] One more try to tune gcc parameters.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 22 Jan 2014 20:50:01 +0100
+
 minieigen (0.4~dfsg~bzr50-5) unstable; urgency=medium
 
   * [9c30a02] Set gcc parameters for all archs.
