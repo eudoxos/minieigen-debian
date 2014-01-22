@@ -8,8 +8,10 @@ DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 export PYTHONPATH :=  $(CURDIR)/debian/python-minieigen/usr/lib/python$(PYVER)/dist-packages:$(PYTHONPATH);
 
-export DEB_CXXFLAGS_MAINT_APPEND = --param ggc-min-expand=0 --param ggc-min-heapsize=4096
-export DEB_CFLAGS_MAINT_APPEND = --param ggc-min-expand=0 --param ggc-min-heapsize=4096
+ifeq (,$(filter $(DEB_HOST_ARCH), amd64))
+export DEB_CXXFLAGS_MAINT_APPEND = --param ggc-min-expand=0 --param ggc-min-heapsize=8192
+export DEB_CFLAGS_MAINT_APPEND = --param ggc-min-expand=0 --param ggc-min-heapsize=8192
+endif
 
 override_dh_installdocs:
 	dh_installdocs
