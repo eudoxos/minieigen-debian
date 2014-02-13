@@ -1,3 +1,13 @@
+minieigen (0.41~dfsg~bzr32-1) unstable; urgency=medium
+
+  * [af18e1e] Imported Upstream version 0.41~dfsg~bzr32.
+              Return back to a previous uploaded version.
+              Contintue discussion with upstream.
+              (Closes: #736507)
+  * [d9eb276] Set canonical VCS-fields.
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 13 Feb 2014 22:55:46 +0100
+
 minieigen (0.4~dfsg~bzr50-6) unstable; urgency=medium
 
   * [3562d4b] One more try to tune gcc parameters.
