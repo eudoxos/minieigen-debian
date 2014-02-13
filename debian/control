@@ -15,8 +15,8 @@ X-Python-Version: >= 2.7
 Standards-Version: 3.9.5
 Section: libs
 Homepage: http://www.launchpad.net/minieigen
-Vcs-Git: git://git.debian.org/git/debian-science/packages/minieigen.git
-Vcs-Browser: http://git.debian.org/?p=debian-science/packages/minieigen.git
+Vcs-Git: git://anonscm.debian.org/debian-science/packages/minieigen.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=debian-science/packages/minieigen.git
 
 Package: python-minieigen
 Section: python
