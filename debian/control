@@ -17,6 +17,7 @@ Section: libs
 Homepage: http://www.launchpad.net/minieigen
 Vcs-Git: git://anonscm.debian.org/debian-science/packages/minieigen.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=debian-science/packages/minieigen.git
+XS-Testsuite: autopkgtest
 
 Package: python-minieigen
 Section: python
