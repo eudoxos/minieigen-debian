@@ -1,3 +1,9 @@
+minieigen (0.41~dfsg~bzr32-2) unstable; urgency=medium
+
+  * [01ad0ae] Enable autotest.
+
+ -- Anton Gladky <gladk@debian.org>  Sat, 15 Feb 2014 21:55:58 +0100
+
 minieigen (0.41~dfsg~bzr32-1) unstable; urgency=medium
 
   * [af18e1e] Imported Upstream version 0.41~dfsg~bzr32.

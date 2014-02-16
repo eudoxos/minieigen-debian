@@ -19,4 +19,4 @@ override_dh_installdocs:
 
 override_dh_auto_install:
 	dh_auto_install
-	$(CURDIR)/debian/tests/unittest.py
+	$(CURDIR)/debian/tests/minieigentest.py
