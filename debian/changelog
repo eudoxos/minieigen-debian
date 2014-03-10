@@ -1,3 +1,12 @@
+minieigen (0.41~dfsg~bzr51~exp1-1) experimental; urgency=medium
+
+  * [ea6d128] Imported Upstream version 0.41~dfsg~bzr51
+  * [bc5fb48] Refresh patch.
+  * [f0241d2] Add parallel option to debian/rules.
+  * [c21bdca] Update dates in copyright.
+
+ -- Anton Gladky <gladk@debian.org>  Mon, 10 Mar 2014 19:38:02 +0100
+
 minieigen (0.41~dfsg~bzr32-2) unstable; urgency=medium
 
   * [01ad0ae] Enable autotest.
