@@ -3,7 +3,7 @@ Upstream-Name: minieigen
 Source: http://www.launchpad.net/minieigen
 
 Files: *
-Copyright: 2008-2012 Václav Šmilauner <eu@doxos.eu>
+Copyright: 2008-2014 Václav Šmilauner <eu@doxos.eu>
 License: LGPL-3.0+
  This package is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
