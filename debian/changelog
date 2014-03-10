@@ -1,3 +1,45 @@
+minieigen (0.41~dfsg~bzr32-2) unstable; urgency=medium
+
+  * [01ad0ae] Enable autotest.
+
+ -- Anton Gladky <gladk@debian.org>  Sat, 15 Feb 2014 21:55:58 +0100
+
+minieigen (0.41~dfsg~bzr32-1) unstable; urgency=medium
+
+  * [af18e1e] Imported Upstream version 0.41~dfsg~bzr32.
+              Return back to a previous uploaded version.
+              Contintue discussion with upstream.
+              (Closes: #736507)
+  * [d9eb276] Set canonical VCS-fields.
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 13 Feb 2014 22:55:46 +0100
+
+minieigen (0.4~dfsg~bzr50-6) unstable; urgency=medium
+
+  * [3562d4b] One more try to tune gcc parameters.
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 26 Jan 2014 23:14:28 +0100
+
+minieigen (0.4~dfsg~bzr50-5) unstable; urgency=medium
+
+  * [9c30a02] Set gcc parameters for all archs.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 22 Jan 2014 10:44:52 +0100
+
+minieigen (0.4~dfsg~bzr50-4) unstable; urgency=medium
+
+  * [47677dc] Use additional gcc parameters on weak archs 
+              to reduce RAM-consumption,
+
+ -- Anton Gladky <gladk@debian.org>  Tue, 21 Jan 2014 20:23:03 +0100
+
+minieigen (0.4~dfsg~bzr50-3) unstable; urgency=medium
+
+  * [71027c0] Update version number in get_orig script.
+  * Move new version from experimental to unstable.
+
+ -- Anton Gladky <gladk@debian.org>  Mon, 13 Jan 2014 21:45:50 +0100
+
 minieigen (0.4~dfsg~bzr50-2) experimental; urgency=medium
 
   * [34938b8] Do not use clang explicitly.
