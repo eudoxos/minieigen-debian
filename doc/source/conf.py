@@ -49,7 +49,7 @@ def fixSignature(app, what, name, obj, options, signature, return_annotation):
 		sig=boostFuncSignature(name,obj,removeSelf=True)[0]
 		return sig,None
 	elif isBoostStaticMethod(what,obj):
-		sig=boostFuncSignature(name,obj,removeSelf=True)[0]+' [STATIC]'
+		sig=boostFuncSignature(name,obj,removeSelf=False)[0]+' [STATIC]'
 		return sig,None
 
 def boostFuncSignature(name,obj,removeSelf=False):
@@ -112,7 +112,7 @@ def setup(app):
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.pngmath']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.pngmath', 'sphinx.ext.todo']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -127,7 +127,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'miniEigen'
+project = u'minieigen'
 copyright = u'2012, Václav Šmilauer'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -301,3 +301,6 @@ man_pages = [
     ('index', 'minieigen', u'minieigen Documentation',
      [u'Václav Šmilauer'], 1)
 ]
+
+todo_include_todos=True
+
