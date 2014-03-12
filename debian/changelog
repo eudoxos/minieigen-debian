@@ -1,3 +1,9 @@
+minieigen (0.41~dfsg~bzr51-1) unstable; urgency=medium
+
+  * [787400b] Upload to unstable.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 12 Mar 2014 21:13:09 +0100
+
 minieigen (0.41~dfsg~bzr51~exp1-1) experimental; urgency=medium
 
   * [ea6d128] Imported Upstream version 0.41~dfsg~bzr51
