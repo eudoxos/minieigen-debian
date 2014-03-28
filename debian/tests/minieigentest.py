@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import unittest, math
+import unittest, math, sys
 import minieigen as mne
 
 class SimpleTests(unittest.TestCase):
@@ -72,4 +72,4 @@ class SimpleTests(unittest.TestCase):
     self.failUnlessEqual(q4.norm(),1)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(testRunner=unittest.TextTestRunner(stream=sys.stdout, verbosity=2))
