@@ -1,3 +1,9 @@
+minieigen (0.41~dfsg~bzr51-2) unstable; urgency=medium
+
+  * [b285b23] Fix autotest. Thanks to Martin Pitt <mpitt@debian.org>
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 28 Mar 2014 17:50:30 +0100
+
 minieigen (0.41~dfsg~bzr51-1) unstable; urgency=medium
 
   * [787400b] Upload to unstable.
