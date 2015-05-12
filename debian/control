@@ -1,40 +1,58 @@
 Source: minieigen
-Priority: optional
 Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
-Uploaders:
- Václav Šmilauer <eu@doxos.eu>,
- Anton Gladky <gladk@debian.org>
-Build-Depends:
- debhelper (>= 9),
- libboost-python-dev,
- libdouble-conversion-dev,
- libeigen3-dev,
- python-dev (>=2.6.6-3~),
- python-sphinx (>= 1.0.7+dfsg)
-X-Python-Version: >= 2.7
-Standards-Version: 3.9.5
+Uploaders: Václav Šmilauer <eu@doxos.eu>,
+           Anton Gladky <gladk@debian.org>
 Section: libs
-Homepage: http://www.launchpad.net/minieigen
+Testsuite: autopkgtest
+Priority: optional
+Build-Depends: debhelper (>= 9),
+               libboost-python-dev,
+               libdouble-conversion-dev,
+               libeigen3-dev,
+               python-dev,
+               python-sphinx (>= 1.0.7+dfsg),
+               python3-all,
+               python3-dev,
+               python3-setuptools
+Standards-Version: 3.9.6
+Vcs-Browser: https://anonscm.debian.org/cgit/debian-science/packages/minieigen.git
 Vcs-Git: git://anonscm.debian.org/debian-science/packages/minieigen.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=debian-science/packages/minieigen.git
-XS-Testsuite: autopkgtest
+Homepage: http://www.launchpad.net/minieigen
+X-Python-Version: >= 2.7
+X-Python3-Version: >= 3.2
 
 Package: python-minieigen
-Section: python
 Architecture: any
-Depends:
- python (<<2.8),
- python (>= 2.7),
- ${misc:Depends},
- ${python:Depends},
- ${shlibs:Depends},
- ${sphinxdoc:Depends}
-Recommends:
- libeigen3-dev
-Description: Small boost::python wrapper of parts of the Eigen library
+Section: python
+Depends: ${misc:Depends},
+         ${python:Depends},
+         ${shlibs:Depends},
+         ${sphinxdoc:Depends}
+Recommends: libeigen3-dev
+Description: Wrapper of parts of the Eigen library (Python 2)
  Small wrapper for core parts of Eigen, c++ library for linear algebra.
  It is mainly useful for inspecting c++ code which already uses eigen and
  boost::python. Supported types are Vectors (2,3,6 and dynamic-sized with
  integer and floating-point values), Matrices (3x3, 6x6 and dynamic-sized
  with floating-point values) and Quaternions. Numerous methods are wrapped
  and the original API of Eigen is followed.
+ .
+ This is the Python 2 version of the package.
+
+Package: python3-minieigen
+Architecture: any
+Section: python
+Depends: ${misc:Depends},
+         ${python3:Depends},
+         ${shlibs:Depends},
+         ${sphinxdoc:Depends}
+Recommends: libeigen3-dev
+Description: Wrapper of parts of the Eigen library (Python 3)
+ Small wrapper for core parts of Eigen, c++ library for linear algebra.
+ It is mainly useful for inspecting c++ code which already uses eigen and
+ boost::python. Supported types are Vectors (2,3,6 and dynamic-sized with
+ integer and floating-point values), Matrices (3x3, 6x6 and dynamic-sized
+ with floating-point values) and Quaternions. Numerous methods are wrapped
+ and the original API of Eigen is followed.
+ .
+ This is the Python 3 version of the package.

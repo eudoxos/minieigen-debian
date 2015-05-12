@@ -1,0 +1,30 @@
+Description: Remove embedded double-conversion
+Author: Anton Gladky <gladk@debian.org>
+Last-Update: 2015-05-12
+
+--- minieigen-0.42~dfsg~bzr51.orig/setup.py
++++ minieigen-0.42~dfsg~bzr51/setup.py
+@@ -20,7 +20,7 @@ if sys.platform=='win32':
+ 		define_macros+=[('EIGEN_DONT_VECTORIZE',None)]
+ else:
+ 	py3k=(sys.version_info[0]==3)
+-	libraries=['boost_python-py3%d'%sys.version_info[1] if py3k else 'boost_python']
++	libraries=['boost_python', 'double-conversion']
+ 	library_dirs=[]
+ 	include_dirs=['/usr/include/eigen3','minieigen']
+ 
+@@ -50,14 +50,6 @@ A small wrapper for core parts of Eigen
+ 			'src/expose-matrices.cpp',
+ 			'src/expose-quaternion.cpp',
+ 			'src/expose-vectors.cpp',
+-			'src/double-conversion/bignum.cc',
+-			'src/double-conversion/bignum-dtoa.cc',
+-			'src/double-conversion/cached-powers.cc',
+-			'src/double-conversion/diy-fp.cc',
+-			'src/double-conversion/double-conversion.cc',
+-			'src/double-conversion/fast-dtoa.cc',
+-			'src/double-conversion/fixed-dtoa.cc',
+-			'src/double-conversion/strtod.cc'
+ 		],
+ 		libraries=libraries,
+ 		library_dirs=library_dirs,

@@ -1,7 +1,9 @@
 #!/usr/bin/make -f
 
+export PYBUILD_NAME=minieigen
+
 %:
-	dh $@ --with python2 --parallel
+	dh $@ --with python2,python3 --parallel --buildsystem=pybuild
 
 PYVER = $(shell pyversions -dv)
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
