@@ -5,7 +5,8 @@
 // methods common for vectors and matrices
 template<typename MatrixBaseT>
 class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >{
-	typedef typename MatrixBaseT::Scalar Scalar;
+	typedef typename MatrixBaseT::Scalar Scalar; // could be complex number
+	typedef typename MatrixBaseT::RealScalar RealScalar; // this is the "real" (math) scalar
 	public:
 	template<class PyClass>
 	void visit(PyClass& cl) const {
@@ -18,6 +19,7 @@ class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >
 		.def("__mul__",&MatrixBaseVisitor::__mul__scalar<long>)
 		.def("__imul__",&MatrixBaseVisitor::__imul__scalar<long>)
 		.def("__rmul__",&MatrixBaseVisitor::__rmul__scalar<long>)
+		.def("isApprox",&MatrixBaseVisitor::isApprox,(py::arg("other"),py::arg("prec")=Eigen::NumTraits<Scalar>::dummy_precision()),"Approximate comparison with precision *prec*.")
 		.def("rows",&MatrixBaseT::rows,"Number of rows.")
 		.def("cols",&MatrixBaseT::cols,"Number of columns.")
 		;
@@ -27,8 +29,13 @@ class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >
 		// reductions
 		cl
 		.def("sum",&MatrixBaseT::sum,"Sum of all elements.")
+		.def("prod",&MatrixBaseT::prod,"Product of all elements.")
+		.def("mean",&MatrixBaseT::mean,"Mean value over all elements.")
 		.def("maxAbsCoeff",&MatrixBaseVisitor::maxAbsCoeff,"Maximum absolute value over all elements.")
 		;
+		// reductions only meaningful for non-complex matrices (e.g. maxCoeff, minCoeff)
+		visit_reductions_noncomplex<Scalar,PyClass>(cl);
+		
 	};
 	private:
 	template<class PyClass> static string name(PyClass& cl){ return py::extract<string>(cl.attr("__name__"))(); }
@@ -50,14 +57,19 @@ class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >
 	template<typename Scalar, class PyClass> static	void visit_if_float(PyClass& cl, typename boost::enable_if<boost::is_integral<Scalar> >::type* dummy = 0){ /* do nothing */ }
 	template<typename Scalar, class PyClass> static void visit_if_float(PyClass& cl, typename boost::disable_if<boost::is_integral<Scalar> >::type* dummy = 0){
 		// operations with other scalars (Scalar is the floating type, long is the python integer type)
+		// __trudiv__ is for py3k
 		cl
 		.def("__mul__",&MatrixBaseVisitor::__mul__scalar<Scalar>)
 		.def("__rmul__",&MatrixBaseVisitor::__rmul__scalar<Scalar>)
 		.def("__imul__",&MatrixBaseVisitor::__imul__scalar<Scalar>)
 		.def("__div__",&MatrixBaseVisitor::__div__scalar<long>)
+		.def("__truediv__",&MatrixBaseVisitor::__div__scalar<long>)
 		.def("__idiv__",&MatrixBaseVisitor::__idiv__scalar<long>)
+		.def("__itruediv__",&MatrixBaseVisitor::__div__scalar<long>)
 		.def("__div__",&MatrixBaseVisitor::__div__scalar<Scalar>)
+		.def("__truediv__",&MatrixBaseVisitor::__div__scalar<Scalar>)
 		.def("__idiv__",&MatrixBaseVisitor::__idiv__scalar<Scalar>)
+		.def("__itruediv__",&MatrixBaseVisitor::__idiv__scalar<Scalar>)
 		//
 		.def("norm",&MatrixBaseT::norm,"Euclidean norm.")
 		.def("__abs__",&MatrixBaseT::norm)
@@ -68,7 +80,7 @@ class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >
 		;
 	}
 	// for fixed-size matrices/vectors only
-	static Scalar maxAbsCoeff(const MatrixBaseT& m){ return m.array().abs().maxCoeff(); }
+	static RealScalar maxAbsCoeff(const MatrixBaseT& m){ return m.array().abs().maxCoeff(); }
 	static MatrixBaseT Ones(){ return MatrixBaseT::Ones(); }
 	static MatrixBaseT Zero(){ return MatrixBaseT::Zero(); }
 	static MatrixBaseT Random(){ return MatrixBaseT::Random(); }
@@ -78,6 +90,7 @@ class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >
 		if(a.rows()!=b.rows() || a.cols()!=b.cols()) return false;
 		return a.cwiseEqual(b).all();
 	}
+	static bool isApprox(const MatrixBaseT& a, const MatrixBaseT& b, const RealScalar& prec){ return a.isApprox(b,prec); }
 	static bool __ne__(const MatrixBaseT& a, const MatrixBaseT& b){ return !__eq__(a,b); }
 	static MatrixBaseT __neg__(const MatrixBaseT& a){ return -a; };
 	static MatrixBaseT __add__(const MatrixBaseT& a, const MatrixBaseT& b){ return a+b; }
@@ -91,10 +104,22 @@ class MatrixBaseVisitor: public py::def_visitor<MatrixBaseVisitor<MatrixBaseT> >
 	template<typename Scalar2> static MatrixBaseT __div__scalar(const MatrixBaseT& a, const Scalar2& scalar){ return a/scalar; }
 	template<typename Scalar2> static MatrixBaseT __idiv__scalar(MatrixBaseT& a, const Scalar2& scalar){ a/=scalar; return a; }
 
+	template<typename Scalar, class PyClass> static	void visit_reductions_noncomplex(PyClass& cl, typename boost::enable_if<boost::is_complex<Scalar> >::type* dummy = 0){ /* do nothing*/ }
+	template<typename Scalar, class PyClass> static	void visit_reductions_noncomplex(PyClass& cl, typename boost::disable_if<boost::is_complex<Scalar> >::type* dummy = 0){
+		// must be wrapped since there are overloads:
+		//   maxCoeff(), maxCoeff(IndexType*), maxCoeff(IndexType*,IndexType*)
+		cl
+		.def("maxCoeff",&MatrixBaseVisitor::maxCoeff0,"Maximum value over all elements.")
+		.def("minCoeff",&MatrixBaseVisitor::minCoeff0,"Minimum value over all elements.")
+		;
+	}
+	static Scalar maxCoeff0(const MatrixBaseT& m){ return m.array().maxCoeff(); }
+	static Scalar minCoeff0(const MatrixBaseT& m){ return m.array().minCoeff(); }
+
 	// we want to keep -0 (rather than replacing it by 0), but that does not work for complex numbers
 	// hence two versions
-	template<typename Scalar> static bool prune_element(const Scalar& num, double absTol, typename boost::disable_if<boost::is_complex<Scalar> >::type* dummy=0){ return std::abs(num)<=absTol || num!=-0; }
-	template<typename Scalar> static bool prune_element(const Scalar& num, double absTol, typename boost::enable_if<boost::is_complex<Scalar> >::type* dummy=0){ return std::abs(num)<=absTol; }
+	template<typename Scalar> static bool prune_element(const Scalar& num, RealScalar absTol, typename boost::disable_if<boost::is_complex<Scalar> >::type* dummy=0){ return std::abs(num)<=absTol || num!=-0; }
+	template<typename Scalar> static bool prune_element(const Scalar& num, RealScalar absTol, typename boost::enable_if<boost::is_complex<Scalar> >::type* dummy=0){ return std::abs(num)<=absTol; }
 	
 	static MatrixBaseT pruned(const MatrixBaseT& a, double absTol=1e-6){ // typename MatrixBaseT::Scalar absTol=1e-6){
 		MatrixBaseT ret(MatrixBaseT::Zero(a.rows(),a.cols()));
@@ -189,6 +214,13 @@ class VectorVisitor: public py::def_visitor<VectorVisitor<VectorT> >{
 	static CompatVec2 Vec3_yz(const CompatVec3& v){ return CompatVec2(v[1],v[2]); }
 	static CompatVec2 Vec3_zy(const CompatVec3& v){ return CompatVec2(v[2],v[1]); }
 	
+	// 4-vector
+	template<typename VectorT2, class PyClass> static void visit_special_sizes(PyClass& cl, typename boost::enable_if_c<VectorT2::RowsAtCompileTime==4>::type* dummy=0){
+		cl
+		.def(py::init<typename VectorT2::Scalar,typename VectorT2::Scalar,typename VectorT2::Scalar>((py::arg("v0"),py::arg("v1"),py::arg("v2"),py::arg("v3"))))
+		;
+	}
+
 	// 6-vector
 	template<typename VectorT2, class PyClass> static void visit_special_sizes(PyClass& cl, typename boost::enable_if_c<VectorT2::RowsAtCompileTime==6>::type* dummy=0){
 		cl
@@ -229,10 +261,11 @@ class VectorVisitor: public py::def_visitor<VectorVisitor<VectorT> >{
 	struct VectorPickle: py::pickle_suite{
 		static py::tuple getinitargs(const VectorT& x){
 			// if this fails, add supported size to the switch below
-			BOOST_STATIC_ASSERT(Dim==2 || Dim==3 || Dim==6 || Dim==Eigen::Dynamic);
+			BOOST_STATIC_ASSERT(Dim==2 || Dim==3 || Dim==4 || Dim==6 || Dim==Eigen::Dynamic);
 			switch((Index)Dim){
 				case 2: return py::make_tuple(x[0],x[1]);
 				case 3: return py::make_tuple(x[0],x[1],x[2]);
+				case 4: return py::make_tuple(x[0],x[1],x[2],x[3]);
 				case 6: return py::make_tuple(x[0],x[1],x[2],x[3],x[4],x[5]);
 				default: return py::make_tuple(py::list(x));
 			}
@@ -533,7 +566,7 @@ class AabbVisitor: public py::def_visitor<AabbVisitor<Box> >{
 	struct BoxPickle: py::pickle_suite{
 		static py::tuple getinitargs(const Box& x){ return py::make_tuple(x.min(),x.max()); }
 	};
-	static Index len(){ return Box::AmbientDimAtCompileTime; }
+	static Index len(){ return 2; }
 	// getters and setters 
 	static Scalar get_item(const Box& self, py::tuple _idx){ Index idx[2]; Index mx[2]={2,Box::AmbientDimAtCompileTime}; IDX2_CHECKED_TUPLE_INTS(_idx,mx,idx); if(idx[0]==0) return self.min()[idx[1]]; return self.max()[idx[1]]; }
 	static void set_item(Box& self, py::tuple _idx, Scalar value){ Index idx[2]; Index mx[2]={2,Box::AmbientDimAtCompileTime}; IDX2_CHECKED_TUPLE_INTS(_idx,mx,idx); if(idx[0]==0) self.min()[idx[1]]=value; else self.max()[idx[1]]=value; }
@@ -572,6 +605,7 @@ class QuaternionVisitor:  public py::def_visitor<QuaternionVisitor<QuaternionT> 
 		.add_static_property("Identity",&QuaternionVisitor::Identity)
 		// methods
 		.def("setFromTwoVectors",&QuaternionVisitor::setFromTwoVectors,((py::arg("u"),py::arg("v"))))
+		.def("angularDistance",&QuaternionVisitor::angularDistance)
 		.def("conjugate",&QuaternionT::conjugate)
 		.def("toAxisAngle",&QuaternionVisitor::toAxisAngle)
 		.def("toAngleAxis",&QuaternionVisitor::toAngleAxis)
@@ -582,6 +616,7 @@ class QuaternionVisitor:  public py::def_visitor<QuaternionVisitor<QuaternionT> 
 		.def("norm",&QuaternionT::norm)
 		.def("normalize",&QuaternionT::normalize)
 		.def("normalized",&QuaternionT::normalized)
+		.def("slerp",&QuaternionVisitor::slerp,(py::arg("t"),py::arg("other")))
 		// .def("random",&QuaternionVisitor::random,"Assign random orientation to the quaternion.")
 		// operators
 		.def(py::self * py::self)
@@ -597,9 +632,13 @@ class QuaternionVisitor:  public py::def_visitor<QuaternionVisitor<QuaternionT> 
 		;
 	}
 	private:
-	static QuaternionT* fromAxisAngle(const CompatVec3& axis, const Scalar& angle){ return new QuaternionT(AngleAxisT(angle,axis)); }
-	static QuaternionT* fromAngleAxis(const Scalar& angle, const CompatVec3& axis){ return new QuaternionT(AngleAxisT(angle,axis)); }
+	static QuaternionT* fromAxisAngle(const CompatVec3& axis, const Scalar& angle){ QuaternionT* ret=new QuaternionT(AngleAxisT(angle,axis)); ret->normalize();  return ret; }
+	static QuaternionT* fromAngleAxis(const Scalar& angle, const CompatVec3& axis){ QuaternionT* ret=new QuaternionT(AngleAxisT(angle,axis)); ret->normalize(); return ret; }
 	static QuaternionT* fromTwoVectors(const CompatVec3& u, const CompatVec3& v){ QuaternionT* q(new QuaternionT); q->setFromTwoVectors(u,v); return q; }
+
+	// those must be wrapped since "other" is declared as QuaternionBase<OtherDerived>; the type is then not inferred when using .def
+	static QuaternionT slerp(const QuaternionT& self, const Real& t, const QuaternionT& other){ return self.slerp(t,other); }
+	static Real angularDistance(const QuaternionT& self, const QuaternionT& other){ return self.angularDistance(other); }
 
 	struct QuaternionPickle: py::pickle_suite{static py::tuple getinitargs(const QuaternionT& x){ return py::make_tuple(x.w(),x.x(),x.y(),x.z());} };
 	static QuaternionT Identity(){ return QuaternionT::Identity(); }
