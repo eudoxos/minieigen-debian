@@ -1,3 +1,12 @@
+minieigen (0.50+dfsg1-1) unstable; urgency=medium
+
+  * [35ad0e4] Add python3-package.
+  * [f943685] Update d/copyright.
+  * [63ee3d5] Add watch-file.
+  * [b9e5f28] Imported Upstream version 0.50+dfsg1
+
+ -- Anton Gladky <gladk@debian.org>  Tue, 12 May 2015 20:55:44 +0200
+
 minieigen (0.41~dfsg~bzr51-2) unstable; urgency=medium
 
   * [b285b23] Fix autotest. Thanks to Martin Pitt <mpitt@debian.org>
