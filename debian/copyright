@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: minieigen
-Source: http://www.launchpad.net/minieigen
+Source: https://github.com/eudoxos/minieigen
 Files-Excluded: src/double-conversion
 
 Files: *
