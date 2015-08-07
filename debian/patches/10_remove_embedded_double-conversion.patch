@@ -9,7 +9,7 @@ Last-Update: 2015-05-12
  else:
  	py3k=(sys.version_info[0]==3)
 -	libraries=['boost_python-py3%d'%sys.version_info[1] if py3k else 'boost_python']
-+	libraries=['boost_python', 'double-conversion']
++	libraries=['boost_python-py3%d'%sys.version_info[1] if py3k else 'boost_python','double-conversion']
  	library_dirs=[]
  	include_dirs=['/usr/include/eigen3','minieigen']
  
